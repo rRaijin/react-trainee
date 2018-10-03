@@ -5,7 +5,6 @@ from rest_framework import routers
 from api.auth.views import RegistrationAPI, LoginAPI, UserAPI
 from api.notes.views import NoteViewSet
 
-
 # API Registration
 from api.users.views import UserViewSet
 

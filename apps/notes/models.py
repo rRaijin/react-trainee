@@ -1,5 +1,6 @@
-from django.contrib.auth.models import User
 from django.db import models
+
+from apps.user.models import User
 
 
 class Note(models.Model):

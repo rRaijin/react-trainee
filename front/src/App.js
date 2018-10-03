@@ -12,6 +12,7 @@ import Login from "./components/Login";
 import Note from "./components/Note";
 import NotFound from "./components/NotFound";
 import Register from "./components/Register";
+import ProfilePage from "./components/ProfilePage";
 
 
 let store = createStore(romaApp, applyMiddleware(thunk));
@@ -42,6 +43,7 @@ class RootContainerComponent extends Component {
           <PrivateRoute exact path="/" component={Note} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
+          <PrivateRoute exact path="/profile" component={ProfilePage} />
           <Route component={NotFound} />
         </Switch>
       </BrowserRouter>

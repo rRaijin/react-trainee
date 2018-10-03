@@ -8,14 +8,8 @@ export default function notes(state=initialState, action) {
     case 'FETCH_NOTES':
       return [...state, ...action.notes];
 
-      case 'ADD_NOTE':
+    case 'ADD_NOTE':
       return [...state, ...action.note];
-
-    // case 'UPDATE_NOTE':
-    //   let noteToUpdate = noteList[action.id];
-    //   noteToUpdate.text = action.text;
-    //   noteList.splice(action.id, 1, noteToUpdate);
-    //   return noteList;
 
     case 'UPDATE_NOTE':
       let noteToUpdate = noteList[action.index];
@@ -24,7 +18,6 @@ export default function notes(state=initialState, action) {
       return noteList;
 
     case 'DELETE_NOTE':
-      // noteList.splice(action.id, 1);
       noteList.splice(action.index, 1);
       return noteList;
 

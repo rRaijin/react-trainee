@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
+
 import {notes, auth} from "../actions";
 
 
@@ -38,7 +40,10 @@ class Note extends Component {
         <h2>Welcome to Note!</h2>
         <hr />
         <div style={{textAlign: "right"}}>
-          {this.props.user.username} (<a onClick={this.props.logout}>logout</a>)
+            <Link to='/profile'>
+                {this.props.user.username}
+            </Link>
+            (<a onClick={this.props.logout}>logout</a>)
         </div>
         <h3>Add new note</h3>
         <form onSubmit={this.submitNote}>
