@@ -9,7 +9,10 @@ class Note extends Component {
   state = {
     text: "",
     updateNoteId: null,
+    // notes: [],
+    // notes: this.props.notes,
   };
+
 
   componentDidMount() {
     this.props.fetchNotes();
@@ -27,7 +30,9 @@ class Note extends Component {
   submitNote = (e) => {
     e.preventDefault();
     if (this.state.updateNoteId === null) {
-      this.props.addNote(this.state.text).then(this.resetForm);
+      this.props.addNote(this.state.text);
+      // this.setState({notes:this.props.notes});
+      // this.setState({notes: this.state.notes.push(this.state.text)});
     } else {
       this.props.updateNote(this.state.updateNoteId, this.state.text).then(this.resetForm);
     }
@@ -37,6 +42,9 @@ class Note extends Component {
   render() {
     return (
       <div>
+
+        <Link to='/'>Home</Link>
+
         <h2>Welcome to Note!</h2>
         <hr />
         <div style={{textAlign: "right"}}>

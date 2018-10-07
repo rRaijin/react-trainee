@@ -8,7 +8,7 @@ export default function users(state=initialState, action) {
     case 'FETCH_USER':
       return [...state, ...action.user];
 
-    case 'UPDATE_USERNAME':
+    case 'UPDATE_USER_ATTR':
       return [...state, ...action.user];
 
     default:

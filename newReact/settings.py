@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     'apps.notes',
     'apps.user',
+    'apps.article',
 ]
 
 WEBPACK_LOADER = {

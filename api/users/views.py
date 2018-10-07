@@ -1,15 +1,21 @@
-from rest_framework import permissions, viewsets
+from rest_framework import mixins, permissions, viewsets
 
-from api.users.serializers import UserSerializer
-from apps.user.models import User
+from . import serializers
 
 
-class UserViewSet(viewsets.ModelViewSet):
+class UserViewSet(mixins.RetrieveModelMixin,
+                  mixins.UpdateModelMixin,
+                  viewsets.GenericViewSet):
+
     permission_classes = [permissions.IsAuthenticated, ]
-    serializer_class = UserSerializer
 
-    queryset = User.objects.all()
+    serializer_class_map = {
+        'retrieve': serializers.UserSerializer,
+        'partial_update': serializers.UpdateUsernameSerializer,
+    }
 
-    # TODO incorrect, temp
+    def get_serializer_class(self):
+        return self.serializer_class_map[self.action]
+
     def get_object(self):
         return self.request.user

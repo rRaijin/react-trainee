@@ -9,7 +9,8 @@ export default function notes(state=initialState, action) {
       return [...state, ...action.notes];
 
     case 'ADD_NOTE':
-      return [...state, ...action.note];
+      noteList.push(action.note);
+      return noteList;
 
     case 'UPDATE_NOTE':
       let noteToUpdate = noteList[action.index];

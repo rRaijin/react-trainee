@@ -1,4 +1,5 @@
-export const updateName = (userId, newname) => {
+export const updateUserAttr = (userId, attr, new_value) => {
+  console.log('input', attr);
   return (dispatch, getState) => {
 
     let headers = {"Content-Type": "application/json", 'Access-Control-Allow-Origin': 'http://localhost:3000'};
@@ -8,11 +9,11 @@ export const updateName = (userId, newname) => {
       headers["Authorization"] = `Token ${token}`;
     }
 
-    let body = JSON.stringify({"username":newname});
+    let input_data = {};
+    input_data[attr] = new_value;
+    let body = JSON.stringify(input_data);
 
-    console.log(headers, body);
-
-    return fetch(`/api/users/${userId}/`, {headers, method: "PUT", body})
+    return fetch(`/api/users/${userId}/`, {headers, method: "PATCH", body})
       // .then(res => {return console.log(res.json())})
       .then(res => {
         if (res.status < 500) {
@@ -26,7 +27,7 @@ export const updateName = (userId, newname) => {
       })
       .then(res => {
         if (res.status === 200) {
-          return dispatch({type: 'UPDATE_USERNAME', user: res.data, userId});
+          return dispatch({type: 'UPDATE_USER_ATTR', user: res.data, userId});
         } else if (res.status === 401 || res.status === 403) {
           dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
           throw res.data;
