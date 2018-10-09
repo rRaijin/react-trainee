@@ -3,6 +3,18 @@ import {connect} from "react-redux";
 
 import {Link, Redirect} from "react-router-dom";
 import {auth} from "../actions";
+import {Paper, RaisedButton, TextField} from "material-ui";
+
+
+const style = {
+    marginTop: 50,
+    marginLeft: '25%',
+    paddingBottom: 50,
+    paddingTop: 25,
+    width: '50%',
+    textAlign: 'center',
+    display: 'inline-block',
+};
 
 
 class Login extends Component {
@@ -10,11 +22,79 @@ class Login extends Component {
   state = {
     username: "",
     password: "",
+    username_error_text: null,
+    password_error_text: null,
+    disabled: true,
   };
 
-  onSubmit = e => {
-    e.preventDefault();
-    this.props.login(this.state.username, this.state.password);
+  onSubmit = () => {
+      this.props.login(this.state.username, this.state.password);
+  };
+
+  validateUsername = username => {
+    // const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const re = /^/;
+    return re.test(username);
+  };
+
+  isDisabled() {
+    let username_is_valid = false;
+    let password_is_valid = false;
+
+    if (this.state.username === '') {
+        this.setState({
+            username_error_text: null,
+        });
+    } else if (this.validateUsername(this.state.username)) {
+        username_is_valid = true;
+        this.setState({
+            username_error_text: null,
+        });
+
+    } else {
+        this.setState({
+            username_error_text: 'Sorry, this is not a valid username',
+        });
+    }
+
+    if (this.state.password === '' || !this.state.password) {
+        this.setState({
+            password_error_text: null,
+        });
+    } else if (this.state.password.length >= 6) {
+        password_is_valid = true;
+        this.setState({
+            password_error_text: null,
+        });
+    } else {
+        this.setState({
+            password_error_text: 'Your password must be at least 6 characters',
+        });
+
+    }
+
+    if (username_is_valid && password_is_valid) {
+        this.setState({
+            disabled: false,
+        });
+    }
+  };
+
+  _handleKeyPress(e) {
+        if (e.key === 'Enter') {
+            if (!this.state.disabled) {
+                this.props.login(this.state.username, this.state.password);
+            }
+        }
+    }
+
+  changeValue(e, type) {
+    const value = e.target.value;
+    const next_state = {};
+    next_state[type] = value;
+    this.setState(next_state, () => {
+        this.isDisabled();
+    });
   };
 
   render() {
@@ -22,37 +102,49 @@ class Login extends Component {
        return <Redirect to="/" />
     }
     return (
-      <form onSubmit={this.onSubmit}>
-        <fieldset>
-          <legend>Login</legend>
-          {this.props.errors.length > 0 && (
-            <ul>
-              {this.props.errors.map(error => (
-                <li key={error.field}>{error.message}</li>
-              ))}
-            </ul>
-          )}
-          <p>
-            <label htmlFor="username">Username</label>
-            <input
-              type="text" id="username"
-              onChange={e => this.setState({username: e.target.value})} />
-          </p>
-          <p>
-            <label htmlFor="password">Password</label>
-            <input
-              type="password" id="password"
-              onChange={e => this.setState({password: e.target.value})} />
-          </p>
-          <p>
-            <button type="submit">Login</button>
-          </p>
-
-          <p>
-            Don't have an account? <Link to="/register">Register</Link>
-          </p>
-        </fieldset>
-      </form>
+        <div onKeyPress={(e) => this._handleKeyPress(e)}>
+            <Paper style={style}>
+                <form role="form">
+                    <fieldset>
+                    <legend>Login Form</legend>
+                    {/*{this.props.errors.length > 0 && (*/}
+                        {/*<ul>*/}
+                            {/*{this.props.errors.map(error => (*/}
+                                {/*<li key={error.field}>{error.message}</li>*/}
+                            {/*))}*/}
+                        {/*</ul>*/}
+                    {/*)}*/}
+                    <div className="col-md-12">
+                        <TextField
+                            hintText="Username"
+                            floatingLabelText="Username"
+                            type="username"
+                            errorText={this.state.username_error_text}
+                            onChange={(e) => this.changeValue(e, 'username')}
+                        />
+                    </div>
+                    <div className="col-md-12">
+                        <TextField
+                            hintText="Password"
+                            floatingLabelText="Password"
+                            type="password"
+                            errorText={this.state.password_error_text}
+                            onChange={(e) => this.changeValue(e, 'password')}
+                        />
+                    </div>
+                    <RaisedButton
+                        disabled={this.state.disabled}
+                        style={{ marginTop: 50 }}
+                        label="Submit"
+                        onClick={this.onSubmit}
+                    />
+                    <p>
+                        Don't have an account? <Link to="/register">Register</Link>
+                    </p>
+                    </fieldset>
+                </form>
+            </Paper>
+        </div>
     )
   }
 }

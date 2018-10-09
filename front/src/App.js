@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import {Route, Switch, BrowserRouter, Redirect, Link} from 'react-router-dom';
+import { Route, Switch, BrowserRouter, Redirect, Link } from 'react-router-dom';
 
 import { createStore, applyMiddleware } from "redux";
 import { Provider, connect } from "react-redux";
 import thunk from "redux-thunk";
+
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import romaApp from "./reducers";
 import {auth} from "./actions";
@@ -84,14 +87,16 @@ let RootContainer = connect(mapStateToProps, mapDispatchToProps)(RootContainerCo
 export default class App extends Component {
   render() {
     return (
-      <div>
-        <div style={{textAlign: "center"}}>
-            some here...
-        </div>
-        <Provider store={store}>
-          <RootContainer />
-        </Provider>
-      </div>
+        <MuiThemeProvider muiTheme={getMuiTheme()}>
+          <div>
+            <div style={{textAlign: "center"}}>
+                some here...
+            </div>
+            <Provider store={store}>
+              <RootContainer />
+            </Provider>
+          </div>
+        </MuiThemeProvider>
     )
   }
 };

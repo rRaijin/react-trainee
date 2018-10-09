@@ -1,3 +1,6 @@
+import {AUTHENTICATION_ERROR, UPDATE_USER_ATTR} from "../constants/index";
+
+
 export const updateUserAttr = (userId, attr, new_value) => {
   console.log('input', attr);
   return (dispatch, getState) => {
@@ -27,9 +30,9 @@ export const updateUserAttr = (userId, attr, new_value) => {
       })
       .then(res => {
         if (res.status === 200) {
-          return dispatch({type: 'UPDATE_USER_ATTR', user: res.data, userId});
+          return dispatch({type: UPDATE_USER_ATTR, user: res.data, userId});
         } else if (res.status === 401 || res.status === 403) {
-          dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
+          dispatch({type: AUTHENTICATION_ERROR, data: res.data});
           throw res.data;
         }
       })

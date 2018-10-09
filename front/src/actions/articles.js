@@ -1,3 +1,6 @@
+import {FETCH_ALL_ARTICLES} from "../constants";
+
+
 export const fetchAllArticles = () => {
   return (dispatch) => {
     let headers = {"Content-Type": "application/json"};
@@ -15,7 +18,7 @@ export const fetchAllArticles = () => {
       })
       .then(res => {
         if (res.status === 200) {
-          return dispatch({type: 'FETCH_ALL_ARTICLES', articles: res.data});
+          return dispatch({type: FETCH_ALL_ARTICLES, articles: res.data});
         }
       })
   }

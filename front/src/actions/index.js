@@ -3,4 +3,10 @@ import * as auth from "./auth";
 import * as users from "./users";
 import * as articles from "./articles";
 
-export {notes, auth, users, articles}
+
+export {
+    notes,
+    auth,
+    users,
+    articles
+}

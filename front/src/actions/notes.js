@@ -1,3 +1,12 @@
+import {
+  ADD_NOTE,
+    AUTHENTICATION_ERROR,
+    DELETE_NOTE,
+    FETCH_NOTES,
+    UPDATE_NOTE
+} from "../constants";
+
+
 export const fetchNotes = () => {
   return (dispatch, getState) => {
     let headers = {"Content-Type": "application/json"};
@@ -20,9 +29,9 @@ export const fetchNotes = () => {
       })
       .then(res => {
         if (res.status === 200) {
-          return dispatch({type: 'FETCH_NOTES', notes: res.data});
+          return dispatch({type: FETCH_NOTES, notes: res.data});
         } else if (res.status === 401 || res.status === 403) {
-          dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
+          dispatch({type: AUTHENTICATION_ERROR, data: res.data});
           throw res.data;
         }
       })
@@ -52,9 +61,9 @@ export const addNote = text => {
       })
       .then(res => {
         if (res.status === 201) {
-          return dispatch({type: 'ADD_NOTE', note: res.data});
+          return dispatch({type: ADD_NOTE, note: res.data});
         } else if (res.status === 401 || res.status === 403) {
-          dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
+          dispatch({type: AUTHENTICATION_ERROR, data: res.data});
           throw res.data;
         }
       })
@@ -87,9 +96,9 @@ export const updateNote = (index, text) => {
       })
       .then(res => {
         if (res.status === 200) {
-          return dispatch({type: 'UPDATE_NOTE', note: res.data, index});
+          return dispatch({type: UPDATE_NOTE, note: res.data, index});
         } else if (res.status === 401 || res.status === 403) {
-          dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
+          dispatch({type: AUTHENTICATION_ERROR, data: res.data});
           throw res.data;
         }
       })
@@ -123,9 +132,9 @@ export const deleteNote = index => {
       })
       .then(res => {
         if (res.status === 204) {
-          return dispatch({type: 'DELETE_NOTE', index});
+          return dispatch({type: DELETE_NOTE, index});
         } else if (res.status === 401 || res.status === 403) {
-          dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
+          dispatch({type: AUTHENTICATION_ERROR, data: res.data});
           throw res.data;
         }
       })
