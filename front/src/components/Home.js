@@ -7,19 +7,13 @@ import {articles} from "../actions";
 
 class Home extends Component {
 
-    // баг, когда возвращаешься по стрелке на этй страницу, список удваивается
-    state = {
-        // articles: this.props.articles,
-        // articles: [],
-    };
-
     componentDidMount() {
-        this.props.fetchAllArticles();
+        if (!this.props.articles || this.props.articles.length === 0) {
+            this.props.fetchAllArticles()
+        }
     };
 
     render() {
-        console.log('props', this.props);
-        console.log('state', this.state);
         return (
             <div>
 

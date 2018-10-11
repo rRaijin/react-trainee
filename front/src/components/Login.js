@@ -2,8 +2,9 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 
 import {Link, Redirect} from "react-router-dom";
-import {auth} from "../actions";
 import {Paper, RaisedButton, TextField} from "material-ui";
+
+import {auth} from "../actions";
 
 
 const style = {
@@ -81,12 +82,12 @@ class Login extends Component {
   };
 
   _handleKeyPress(e) {
-        if (e.key === 'Enter') {
-            if (!this.state.disabled) {
-                this.props.login(this.state.username, this.state.password);
-            }
+    if (e.key === 'Enter') {
+        if (!this.state.disabled) {
+            this.props.login(this.state.username, this.state.password);
         }
     }
+  };
 
   changeValue(e, type) {
     const value = e.target.value;
@@ -106,41 +107,41 @@ class Login extends Component {
             <Paper style={style}>
                 <form role="form">
                     <fieldset>
-                    <legend>Login Form</legend>
-                    {/*{this.props.errors.length > 0 && (*/}
-                        {/*<ul>*/}
-                            {/*{this.props.errors.map(error => (*/}
-                                {/*<li key={error.field}>{error.message}</li>*/}
-                            {/*))}*/}
-                        {/*</ul>*/}
-                    {/*)}*/}
-                    <div className="col-md-12">
-                        <TextField
-                            hintText="Username"
-                            floatingLabelText="Username"
-                            type="username"
-                            errorText={this.state.username_error_text}
-                            onChange={(e) => this.changeValue(e, 'username')}
+                        <legend>Login Form</legend>
+                        {this.props.errors.length > 0 && (
+                            <ul>
+                                {this.props.errors.map(error => (
+                                    <li key={error.field}>{error.message}</li>
+                                ))}
+                            </ul>
+                        )}
+                        <div className="col-md-12">
+                            <TextField
+                                hintText="Username"
+                                floatingLabelText="Username"
+                                type="username"
+                                errorText={this.state.username_error_text}
+                                onChange={(e) => this.changeValue(e, 'username')}
+                            />
+                        </div>
+                        <div className="col-md-12">
+                            <TextField
+                                hintText="Password"
+                                floatingLabelText="Password"
+                                type="password"
+                                errorText={this.state.password_error_text}
+                                onChange={(e) => this.changeValue(e, 'password')}
+                            />
+                        </div>
+                        <RaisedButton
+                            disabled={this.state.disabled}
+                            style={{ marginTop: 50 }}
+                            label="Submit"
+                            onClick={this.onSubmit}
                         />
-                    </div>
-                    <div className="col-md-12">
-                        <TextField
-                            hintText="Password"
-                            floatingLabelText="Password"
-                            type="password"
-                            errorText={this.state.password_error_text}
-                            onChange={(e) => this.changeValue(e, 'password')}
-                        />
-                    </div>
-                    <RaisedButton
-                        disabled={this.state.disabled}
-                        style={{ marginTop: 50 }}
-                        label="Submit"
-                        onClick={this.onSubmit}
-                    />
-                    <p>
-                        Don't have an account? <Link to="/register">Register</Link>
-                    </p>
+                        <p>
+                            Don't have an account? <Link to="/register">Register</Link>
+                        </p>
                     </fieldset>
                 </form>
             </Paper>

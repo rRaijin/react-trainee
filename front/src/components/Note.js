@@ -9,13 +9,12 @@ class Note extends Component {
   state = {
     text: "",
     updateNoteId: null,
-    // notes: [],
-    // notes: this.props.notes,
   };
 
-
   componentDidMount() {
-    this.props.fetchNotes();
+    if (!this.props.notes || this.props.notes.length === 0) {
+            this.props.fetchNotes()
+    }
   };
 
   resetForm = () => {
@@ -31,8 +30,6 @@ class Note extends Component {
     e.preventDefault();
     if (this.state.updateNoteId === null) {
       this.props.addNote(this.state.text);
-      // this.setState({notes:this.props.notes});
-      // this.setState({notes: this.state.notes.push(this.state.text)});
     } else {
       this.props.updateNote(this.state.updateNoteId, this.state.text).then(this.resetForm);
     }
