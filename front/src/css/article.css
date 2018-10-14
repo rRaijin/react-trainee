@@ -1,0 +1,32 @@
+.article-container {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    background-color: #f1eee8;
+    padding: 0 10px;
+    border-bottom: 1px solid silver;
+}
+
+.article-container img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+}
+
+.article-description {
+    padding-top: 10px;
+    text-align: justify;
+}
+
+.article-container p:last-child {
+    text-align: right;
+    margin-right: 10px;
+    color: #5256da;
+    font-size: 15px;
+}
+
+.article-headline {
+    margin: 0;
+    color: #484848;
+    font-weight: bold;
+}

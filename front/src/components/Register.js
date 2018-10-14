@@ -104,7 +104,7 @@ class Register extends Component {
     return (
         <div onKeyPress={(e) => this._handleKeyPress(e)}>
             <Paper style={style}>
-                <form role="form">
+                <form>
                     <fieldset>
                         <legend>Register</legend>
                         {this.props.errors.length > 0 && (

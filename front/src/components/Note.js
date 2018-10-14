@@ -39,11 +39,6 @@ class Note extends Component {
   render() {
     return (
       <div>
-
-        <Link to='/'>Home</Link>
-
-        <h2>Welcome to Note!</h2>
-        <hr />
         <div style={{textAlign: "right"}}>
             <Link to='/profile'>
                 {this.props.user.username}

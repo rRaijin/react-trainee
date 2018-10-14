@@ -1,8 +1,35 @@
 @import url("css/normalize.css");
-/*@import url("css/sakura.css");*/
+@import url("css/article.css");
+@import url("css/profile-page.css");
 
-/*body {*/
-  /*margin: 0;*/
-  /*padding: 0;*/
-  /*font-family: sans-serif;*/
-/*}*/
+
+.header, .footer {
+    background-color: grey;
+    border: 1px solid silver;
+}
+
+:first-letter {
+    text-transform: uppercase;
+}
+
+nav {
+    background-color: #fff;
+    position: relative;
+    overflow: hidden;
+    font-size: 18px;
+    font-family: Arial, 'sans-serif';
+}
+
+nav a {
+    margin: 0 10px;
+    padding: 5px;
+}
+
+nav a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+nav :last-child {
+    color: black;
+}

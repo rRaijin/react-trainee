@@ -10,8 +10,7 @@ class ProfilePage extends Component {
     state = {
         text: "",
         attr: "",
-        username: this.props.user.username,
-        first_name: this.props.user.first_name,
+        user: this.props.user,
     };
 
     resetForm = name => {
@@ -32,15 +31,18 @@ class ProfilePage extends Component {
     };
 
     render() {
-        // console.log(this.props.user);
         return (
-            <div>
-                <div>
-
-                    <Link to='/'>Home</Link>
-                    <Link to='/notes'>Notes</Link>
-
-                    <h3>{this.state.username}</h3>
+            <div className="row">
+                <div className="col-lg-6 profile-info">
+                    {
+                        this.state.user.avatar_name &&
+                        <img src={require('../images/avatars/' + this.state.user.avatar_name)} alt=""/>
+                    }
+                    <h3>{this.state.user.username}</h3>
+                    <p>{this.state.user.first_name}</p>
+                    <p>{this.state.user.last_name}</p>
+                    <p>{this.state.user.birth_date}</p>
+                    <p>{this.state.user.joined}</p>
                     <form onSubmit={this.submitNewValueForUserAttr}>
                       <input
                         value={this.state.text}
@@ -50,14 +52,14 @@ class ProfilePage extends Component {
                     </form>
                 </div>
                 <div>
-                    <p>{this.state.username}</p>
-                    <button onClick={() => this.selectForEdit(this.state.username, 'username')}>
+                    <p>{this.state.user.username}</p>
+                    <button onClick={() => this.selectForEdit(this.state.user.username, 'username')}>
                         edit username
                     </button>
                 </div>
                 <div>
-                    <p>{this.state.first_name}</p>
-                    <button onClick={() => this.selectForEdit(this.state.first_name, 'first_name')}>
+                    <p>{this.state.user.first_name}</p>
+                    <button onClick={() => this.selectForEdit(this.state.user.first_name, 'first_name')}>
                         edit first name
                     </button>
                 </div>

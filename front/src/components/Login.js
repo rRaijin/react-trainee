@@ -105,7 +105,7 @@ class Login extends Component {
     return (
         <div onKeyPress={(e) => this._handleKeyPress(e)}>
             <Paper style={style}>
-                <form role="form">
+                <form>
                     <fieldset>
                         <legend>Login Form</legend>
                         {this.props.errors.length > 0 && (

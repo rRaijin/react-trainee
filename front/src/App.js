@@ -41,28 +41,25 @@ class RootContainerComponent extends Component {
 
   render() {
     let {PrivateRoute} = this;
-    // console.log('props', this.props.auth.user.username);
     return (
-      <BrowserRouter>
-        <div>
-        <Link to='/profile'>
-
-            {/*TODO user in here is undefined */}
-
-            {/*{this.props.auth.user.username}*/}
-
-            Profile
-        </Link>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <PrivateRoute exact path="/notes" component={Note} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
-          <PrivateRoute exact path="/profile" component={ProfilePage} />
-          <Route component={NotFound} />
-        </Switch>
-        </div>
-      </BrowserRouter>
+        <BrowserRouter>
+            <div>
+                <nav>
+                    <Link to='/'>Home</Link>
+                    <Link to='/notes'>Notes</Link>
+                    {/*TODO убрать ссылку если юзер аноним*/}
+                    <Link to='/profile'>Profile</Link>
+                </nav>
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <PrivateRoute exact path="/notes" component={Note} />
+                    <Route exact path="/register" component={Register} />
+                    <Route exact path="/login" component={Login} />
+                    <PrivateRoute exact path="/profile" component={ProfilePage} />
+                    <Route component={NotFound} />
+                </Switch>
+            </div>
+        </BrowserRouter>
     );
   }
 }
@@ -88,13 +85,18 @@ export default class App extends Component {
   render() {
     return (
         <MuiThemeProvider muiTheme={getMuiTheme()}>
-          <div>
-            <div style={{textAlign: "center"}}>
-                some here...
+          <div className="container">
+            <div className="header">
+                header
             </div>
-            <Provider store={store}>
-              <RootContainer />
-            </Provider>
+            <div className="main-content">
+                <Provider store={store}>
+                    <RootContainer />
+                </Provider>
+            </div>
+            <div className="footer">
+                footer
+            </div>
           </div>
         </MuiThemeProvider>
     )
