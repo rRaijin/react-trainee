@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
 
 import {users} from "../actions";
 
@@ -11,6 +10,10 @@ class ProfilePage extends Component {
         text: "",
         attr: "",
         user: this.props.user,
+        username: this.props.user.username,
+        first_name: this.props.user.first_name,
+        last_name: this.props.user.last_name,
+        birth_date: this.props.user.birth_date,
     };
 
     resetForm = name => {
@@ -32,36 +35,49 @@ class ProfilePage extends Component {
 
     render() {
         return (
-            <div className="row">
-                <div className="col-lg-6 profile-info">
+            <div className="row profile-info">
+                <div className="col-lg-2">
                     {
                         this.state.user.avatar_name &&
                         <img src={require('../images/avatars/' + this.state.user.avatar_name)} alt=""/>
                     }
-                    <h3>{this.state.user.username}</h3>
-                    <p>{this.state.user.first_name}</p>
-                    <p>{this.state.user.last_name}</p>
-                    <p>{this.state.user.birth_date}</p>
+                </div>
+                <div className="col-lg-4">
+                    <h3>
+                        {this.state.username}
+                        [
+                            <span onClick={() => this.selectForEdit(this.state.user.username, 'username')}>E</span>
+                        ]
+                    </h3>
+                    <p>
+                        {this.state.first_name}
+                        [
+                            <span onClick={() => this.selectForEdit(this.state.user.first_name, 'first_name')}>E</span>
+                        ]
+                        [X]
+                    </p>
+                    <p>
+                        {this.state.last_name}
+                        [
+                            <span onClick={() => this.selectForEdit(this.state.user.last_name, 'last_name')}>E</span>
+                        ]
+                        [X]
+                    </p>
+                    <p>
+                        {this.state.birth_date}
+                        [
+                            <span onClick={() => this.selectForEdit(this.state.user.birth_date, 'birth_date')}>E</span>
+                        ]
+                        [X]
+                    </p>
                     <p>{this.state.user.joined}</p>
                     <form onSubmit={this.submitNewValueForUserAttr}>
                       <input
                         value={this.state.text}
                         onChange={(e) => this.setState({text: e.target.value})}
                         required />
-                      <input type="submit" value="Save Name" />
+                      <input type="submit" value="Save" />
                     </form>
-                </div>
-                <div>
-                    <p>{this.state.user.username}</p>
-                    <button onClick={() => this.selectForEdit(this.state.user.username, 'username')}>
-                        edit username
-                    </button>
-                </div>
-                <div>
-                    <p>{this.state.user.first_name}</p>
-                    <button onClick={() => this.selectForEdit(this.state.user.first_name, 'first_name')}>
-                        edit first name
-                    </button>
                 </div>
             </div>
         )

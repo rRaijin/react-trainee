@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
 
-import {notes, auth} from "../actions";
+import {notes} from "../actions";
 
 
 class Note extends Component {
@@ -39,12 +38,19 @@ class Note extends Component {
   render() {
     return (
       <div>
-        <div style={{textAlign: "right"}}>
-            <Link to='/profile'>
-                {this.props.user.username}
-            </Link>
-            (<a onClick={this.props.logout}>logout</a>)
-        </div>
+        <h3>My notes</h3>
+        <hr />
+        <table>
+          <tbody>
+            {this.props.notes.map((note, id) => (
+              <tr key={`note_${id}`}>
+                <td>{note.text}</td>
+                <td><span onClick={() => this.selectForEdit(id)}>[E]</span></td>
+                <td><span onClick={() => this.props.deleteNote(id)}>[X]</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
         <h3>Add new note</h3>
         <form onSubmit={this.submitNote}>
           <input
@@ -54,20 +60,7 @@ class Note extends Component {
             required />
           <input type="submit" value="Save Note" />
         </form>
-        <button onClick={this.resetForm}>Reset</button>
-
-        <h3>Notes</h3>
-        <table>
-          <tbody>
-            {this.props.notes.map((note, id) => (
-              <tr key={`note_${id}`}>
-                <td>{note.text}</td>
-                <td><button onClick={() => this.selectForEdit(id)}>edit</button></td>
-                <td><button onClick={() => this.props.deleteNote(id)}>delete</button></td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        {/*<button onClick={this.resetForm}>Reset</button>*/}
       </div>
     )
   }
@@ -94,7 +87,6 @@ const mapDispatchToProps = dispatch => {
     deleteNote: (id) => {
       dispatch(notes.deleteNote(id));
     },
-    logout: () => dispatch(auth.logout()),
   }
 };
 

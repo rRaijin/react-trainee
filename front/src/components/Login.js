@@ -102,19 +102,22 @@ class Login extends Component {
     if (this.props.isAuthenticated) {
        return <Redirect to="/" />
     }
+    // console.log(this.props.errors);
     return (
         <div onKeyPress={(e) => this._handleKeyPress(e)}>
             <Paper style={style}>
                 <form>
                     <fieldset>
                         <legend>Login Form</legend>
-                        {this.props.errors.length > 0 && (
-                            <ul>
-                                {this.props.errors.map(error => (
-                                    <li key={error.field}>{error.message}</li>
-                                ))}
-                            </ul>
-                        )}
+                        {/*TODO обработать ошибки*/}
+                        
+                        {/*{this.props.errors.length > 0 && (*/}
+                            {/*<ul>*/}
+                                {/*{this.props.errors.map(error => (*/}
+                                    {/*<li key={error.field}>{error.message}</li>*/}
+                                {/*))}*/}
+                            {/*</ul>*/}
+                        {/*)}*/}
                         <div className="col-md-12">
                             <TextField
                                 hintText="Username"

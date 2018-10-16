@@ -47,8 +47,9 @@ class RootContainerComponent extends Component {
                 <nav>
                     <Link to='/'>Home</Link>
                     <Link to='/notes'>Notes</Link>
-                    {/*TODO убрать ссылку если юзер аноним*/}
-                    <Link to='/profile'>Profile</Link>
+                    <Link to='/profile' hidden={!this.props.auth.isAuthenticated}>Profile</Link>
+                    <a onClick={this.props.logout} hidden={!this.props.auth.isAuthenticated}>(logout)</a>
+                    <Link to='/login' hidden={this.props.auth.isAuthenticated}>Login</Link>
                 </nav>
                 <Switch>
                     <Route exact path="/" component={Home} />
@@ -74,7 +75,8 @@ const mapDispatchToProps = dispatch => {
   return {
     loadUser: () => {
       return dispatch(auth.loadUser());
-    }
+    },
+    logout: () => dispatch(auth.logout()),
   }
 };
 
