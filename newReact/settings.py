@@ -41,11 +41,13 @@ INSTALLED_APPS = [
     'corsheaders',
     'webpack_loader',
     'rest_framework',
+    'rest_framework_swagger',
     'knox',
 
     'apps.notes',
     'apps.user',
     'apps.article',
+    'apps.comment',
 ]
 
 WEBPACK_LOADER = {

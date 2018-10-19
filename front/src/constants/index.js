@@ -18,3 +18,4 @@ export const UPDATE_NOTE = 'UPDATE_NOTE';
 export const DELETE_NOTE = 'DELETE_NOTE';
 
 export const FETCH_ALL_ARTICLES = 'FETCH_ALL_ARTICLES';
+export const GET_ARTICLE = 'GET_ARTICLE';

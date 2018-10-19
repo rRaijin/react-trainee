@@ -36,6 +36,8 @@ class Note extends Component {
   };
 
   render() {
+    console.log('props', this.props);
+    console.log('state', this.state);
     return (
       <div>
         <h3>My notes</h3>

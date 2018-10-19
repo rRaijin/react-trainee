@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import {Link} from "react-router-dom";
 
 
 export default class Article extends Component {
@@ -19,6 +19,8 @@ export default class Article extends Component {
                     {/*TODO костыль, нужно зять у последнего спана первую букву, через ферст леттер пока не пошло*/}
                     <span className="username">{this.props.article.author.username}</span>
                 </p>
+                {/*<a onClick={this.props.detail}>sdfsdf</a>*/}
+                <Link to={{ pathname: 'articles/' + this.props.article.id}}>sd</Link>
             </div>
         )
     }
