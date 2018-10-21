@@ -1,4 +1,4 @@
-import {AUTHENTICATION_ERROR, FETCH_ALL_ARTICLES, GET_ARTICLE} from "../constants";
+import {FETCH_ALL_ARTICLES, GET_ARTICLE} from "../constants";
 
 
 export const fetchAllArticles = () => {
@@ -34,8 +34,6 @@ export const articleDetail = id => {
       headers["Authorization"] = `Token ${token}`;
     }
 
-    // console.log('aidiwnik', id);
-
     return fetch(`/api/articles/${id}/`, {headers, method: "GET"})
       .then(res => {
         if (res.status < 500) {
@@ -49,11 +47,7 @@ export const articleDetail = id => {
       })
       .then(res => {
         if (res.status === 200) {
-          // console.log(res);
           return dispatch({type: GET_ARTICLE, article: res.data});
-        } else if (res.status === 401 || res.status === 403) {
-          dispatch({type: AUTHENTICATION_ERROR, data: res.data});
-          throw res.data;
         }
       })
   }

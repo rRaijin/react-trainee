@@ -11,8 +11,8 @@ export default function articles(state=initialState, action) {
       return [...state, ...action.articles];
 
     case GET_ARTICLE:
-      return [...state, ...action.article];
       // return action.article;
+      return [...state, ...action.article];
 
     default:
       return state;
