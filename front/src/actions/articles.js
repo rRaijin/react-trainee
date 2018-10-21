@@ -1,4 +1,7 @@
-import {FETCH_ALL_ARTICLES, GET_ARTICLE} from "../constants";
+import {
+    FETCH_ALL_ARTICLES,
+    GET_ARTICLE
+} from "../constants";
 
 
 export const fetchAllArticles = () => {

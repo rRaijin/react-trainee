@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Link} from "react-router-dom";
 
 
-export default class Article extends Component {
+export default class ArticlePreview extends Component {
 
     render() {
         return (
@@ -16,9 +16,13 @@ export default class Article extends Component {
                 {/*еще один костыль нужен шорттекст for preview*/}
                 <p className="article-description">{this.props.article.description}</p>
                 <p>
-                    <span>Published at {this.props.article.created}</span>
+                    <span>Published at {this.props.article.created} by </span>
+                    <Link to={{ pathname: 'users/' + this.props.article.author.id + '/author' }}>
+                        {/*TODO костыль, нужно зять у последнего спана первую букву, через ферст леттер пока не пошло*/}
+                        <span className="username">{this.props.article.author.username}</span>
+                    </Link>
                 </p>
-                <Link to={{ pathname: '/articles/' + this.props.article.id}}>more >></Link>
+                <Link to={{ pathname: 'articles/' + this.props.article.id}}>more >></Link>
             </div>
         )
     }

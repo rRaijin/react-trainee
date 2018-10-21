@@ -1,4 +1,7 @@
-import {FETCH_USER, UPDATE_USER_ATTR} from "../constants";
+import {
+    FETCH_USER,
+    UPDATE_USER_ATTR
+} from "../constants";
 
 
 const initialState = [];

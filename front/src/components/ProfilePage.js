@@ -6,15 +6,18 @@ import {users} from "../actions";
 
 class ProfilePage extends Component {
 
-    state = {
-        text: "",
-        attr: "",
-        user: this.props.user,
-        username: this.props.user.username,
-        first_name: this.props.user.first_name,
-        last_name: this.props.user.last_name,
-        birth_date: this.props.user.birth_date,
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            text: "",
+            attr: "",
+            user: this.props.user,
+            username: this.props.user.username,
+            first_name: this.props.user.first_name,
+            last_name: this.props.user.last_name,
+            birth_date: this.props.user.birth_date,
+        };
+    }
 
     resetForm = name => {
         let display_attr = {};
@@ -94,7 +97,7 @@ const mapDispatchToProps = dispatch => {
   return {
     updateAttr: (id, attr, new_value) => {
       return dispatch(users.updateUserAttr(id, attr, new_value));
-    },
+    }
   }
 };
 

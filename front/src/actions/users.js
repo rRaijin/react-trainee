@@ -1,8 +1,36 @@
-import {AUTHENTICATION_ERROR, UPDATE_USER_ATTR} from "../constants/index";
+import {
+    AUTHENTICATION_ERROR,
+    FETCH_USER,
+    UPDATE_USER_ATTR
+} from "../constants/index";
+
+
+export const fetchUser = userId => {
+  return (dispatch) => {
+
+    let headers = {"Content-Type": "application/json", 'Access-Control-Allow-Origin': 'http://localhost:3000'};
+
+    return fetch(`/api/users/${userId}/author/`, {headers, })
+      .then(res => {
+        if (res.status < 500) {
+          return res.json().then(data => {
+            return {status: res.status, data};
+          })
+        } else {
+          console.log("Server Error!");
+          throw res;
+        }
+      })
+      .then(res => {
+        if (res.status === 200) {
+          return dispatch({type: FETCH_USER, user: res.data});
+        }
+      })
+  }
+};
 
 
 export const updateUserAttr = (userId, attr, new_value) => {
-  console.log('input', attr);
   return (dispatch, getState) => {
 
     let headers = {"Content-Type": "application/json", 'Access-Control-Allow-Origin': 'http://localhost:3000'};

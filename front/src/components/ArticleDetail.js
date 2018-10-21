@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 
 import {articles} from "../actions";
 
@@ -15,7 +16,6 @@ class ArticleDetail extends Component {
     }
 
     componentDidMount() {
-        // this.props.articleDetail(this.state.articleId);
         this.props.articleDetail(this.state.articleId).then(
             (res) => {
                 this.setState({ article: res.article },
@@ -36,10 +36,14 @@ class ArticleDetail extends Component {
                 <p className="article-description">{this.state.article.description}</p>
                 <p>
                     <span>Published at {this.state.article.created} by </span>
-                    {/*TODO костыль, нужно зять у последнего спана первую букву, через ферст леттер пока не пошло*/}
-                    <span className="username">
-                        {this.state.article.author ? this.state.article.author.username:""}
-                    </span>
+                    {
+                        this.state.article.author &&
+                        <Link to={{ pathname: '/users/' + this.state.article.author.id + '/author' }}>
+                            <span className="username">
+                                {this.state.article.author.username}
+                            </span>
+                        </Link>
+                    }
                 </p>
             </div>
         )

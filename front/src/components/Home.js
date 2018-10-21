@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
 import {articles} from "../actions";
-import Article from "./Article";
+import ArticlePreview from "./ArticlePreview";
 
 class Home extends Component {
 
@@ -17,7 +17,7 @@ class Home extends Component {
             <div className="row">
                 <div className="col-lg-8">
                     {this.props.articles.map((article, id) => (
-                        <Article article={article} key={id} />
+                        <ArticlePreview article={article} key={id} />
                     ))}
                 </div>
             </div>

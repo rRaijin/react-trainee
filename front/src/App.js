@@ -18,6 +18,7 @@ import NotFound from "./components/NotFound";
 import Register from "./components/Register";
 import ProfilePage from "./components/ProfilePage";
 import ArticleDetail from "./components/ArticleDetail";
+import AuthorPage from "./components/AuthorPage";
 
 
 let store = createStore(romaApp, applyMiddleware(thunk));
@@ -59,6 +60,7 @@ class RootContainerComponent extends Component {
                     <Route exact path="/login" component={Login} />
                     <PrivateRoute exact path="/profile" component={ProfilePage} />
                     <Route path="/articles/:id" component={ArticleDetail} />
+                    <Route path="/users/:id/author" component={AuthorPage} />
                     <Route component={NotFound} />
                 </Switch>
             </div>
