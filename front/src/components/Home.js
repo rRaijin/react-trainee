@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 
 import {articles} from "../actions";
 import ArticlePreview from "./ArticlePreview";
+import CreateArticleDialog from "./CreateArticleDialog";
 
 class Home extends Component {
 
@@ -20,6 +21,9 @@ class Home extends Component {
                         <ArticlePreview article={article} key={id} />
                     ))}
                 </div>
+                <div className="col-lg-4">
+                    <CreateArticleDialog add_article={this.props.addArticle} />
+                </div>
             </div>
         )
     }
@@ -36,6 +40,9 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchAllArticles: () => {
             dispatch(articles.fetchAllArticles());
+        },
+        addArticle: (headline, description) => {
+            return dispatch(articles.addArticle(headline, description));
         }
     }
 };

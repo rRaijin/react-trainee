@@ -11,7 +11,7 @@ class ArticleViewSet(viewsets.ModelViewSet):
     # TODO set permissions for list -> allowany, for update/delete -> custom owner, for create -> isauthenticated
 
     def get_queryset(self):
-        return Article.objects.prefetch_related('author')
+        return Article.objects.prefetch_related('author').order_by('-created')
 
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+        serializer.save(author=self.request.user)

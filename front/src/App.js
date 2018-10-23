@@ -43,6 +43,7 @@ class RootContainerComponent extends Component {
 
   render() {
     let {PrivateRoute} = this;
+    console.log(this.props.auth);
     return (
         <BrowserRouter>
             <div>

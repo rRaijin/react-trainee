@@ -35,3 +35,23 @@ class ArticleSerializer(serializers.ModelSerializer):
             'created',
             'author',
         )
+
+
+class CreateArticleSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Article
+        fields = (
+            'id',
+            'author',
+            'headline',
+            'description',
+            'created',
+            'updated',
+        )
+        read_only_fields = (
+            'id',
+            'created',
+            'updated',
+            'author',
+        )
