@@ -1,10 +1,5 @@
-from typing import TYPE_CHECKING
-
 from django.contrib.auth.models import BaseUserManager
 from django.db import models
-
-# if TYPE_CHECKING:
-#     from .models import User
 
 
 class UserQuerySet(models.QuerySet):
@@ -12,6 +7,7 @@ class UserQuerySet(models.QuerySet):
 
 
 class UserManager(BaseUserManager.from_queryset(UserQuerySet)):
+
     def _create_user(self, username, password, **extra_fields):
         username = self.model.normalize_username(username)
         user = self.model(username=username, **extra_fields)

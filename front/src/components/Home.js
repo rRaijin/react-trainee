@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
 import {articles} from "../actions";
-import ArticlePreview from "./ArticlePreview";
+import ArticlePreview from "./article/ArticlePreview";
 import CreateArticleDialog from "./CreateArticleDialog";
 
 class Home extends Component {
@@ -41,8 +41,8 @@ const mapDispatchToProps = dispatch => {
         fetchAllArticles: () => {
             dispatch(articles.fetchAllArticles());
         },
-        addArticle: (headline, description) => {
-            return dispatch(articles.addArticle(headline, description));
+        addArticle: (headline, description, image) => {
+            return dispatch(articles.addArticle(headline, description, image));
         }
     }
 };

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 
-import {articles} from "../actions";
+import {articles} from "../../actions/index";
 
 
 class ArticleDetail extends Component {
@@ -29,7 +29,8 @@ class ArticleDetail extends Component {
             <div className="article-container">
                 {
                     this.state.article.img_name &&
-                    <img src={require('../images/articles/' + this.state.article.img_name)} alt=""/>
+                    <img src={require('../../images/articles/' + this.state.article.img_name)}
+                         alt=""/>
                 }
                 <h3 className="article-headline">{this.state.article.headline}</h3>
                 {/*тоже пока костыль нид через ферст оф тайп взять*/}

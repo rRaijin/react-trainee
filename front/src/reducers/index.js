@@ -1,15 +1,16 @@
 import { combineReducers } from 'redux';
-import notes from "./notes";
-import auth from "./auth";
-import users from "./users";
+
 import articles from "./articles";
+import auth from "./auth";
+import notes from "./notes";
+import users from "./users";
 
 
 const romaApp = combineReducers({
-    notes,
-    auth,
-    users,
     articles,
+    auth,
+    notes,
+    users,
 });
 
 export default romaApp;

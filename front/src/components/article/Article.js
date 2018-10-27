@@ -10,10 +10,9 @@ export default class Article extends Component {
                 <h3 className="article-headline">{this.props.article.headline}</h3>
                 {
                     this.props.article.img_name &&
-                    <img src={require('../images/articles/' + this.props.article.img_name)} alt=""/>
+                    <img src={require('../../images/articles/' + this.props.article.img_name)} alt=""/>
                 }
                 {/*тоже пока костыль нид через ферст оф тайп взять*/}
-                {/*еще один костыль нужен шорттекст for preview*/}
                 <p className="article-description">{this.props.article.description}</p>
                 <p>
                     <span>Published at {this.props.article.created}</span>

@@ -9,13 +9,18 @@ class ArticlePreviewSerializer(serializers.ModelSerializer):
 
     created = serializers.DateTimeField(format="%Y-%m-%d", required=False, read_only=True)
     updated = serializers.DateTimeField(format="%Y-%m-%d", required=False, read_only=True)
-
-    # TODO костыль для получения имени картинки для получения полного пути в компоненте
+    short_description = serializers.SerializerMethodField()
     img_name = serializers.SerializerMethodField()
 
     def get_img_name(self, obj):
         if obj.image:
-            return obj.image.name
+            return obj.image.name.split('/')[-1]
+        else:
+            return False
+
+    def get_short_description(self, obj):
+        if obj.description:
+            return obj.description[:100]
         else:
             return False
 
@@ -24,7 +29,7 @@ class ArticlePreviewSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'headline',
-            'description',
+            'short_description',
             'img_name',
             'created',
             'updated',
@@ -32,6 +37,8 @@ class ArticlePreviewSerializer(serializers.ModelSerializer):
         read_only_fields = (
             'id',
             'created',
+            'img_name',
+            'short_description',
         )
 
 

@@ -4,12 +4,11 @@ from rest_framework import routers
 
 from api.article.views import ArticleViewSet
 from api.auth.views import RegistrationAPI, LoginAPI, UserAPI
-from api.notes.views import NoteViewSet
 from api.comment.views import CommentViewSet
-
-# API Registration
+from api.notes.views import NoteViewSet
 from api.users.views import UserViewSet
 
+# API Registration
 router = routers.DefaultRouter()
 router.register(r'notes', NoteViewSet, base_name='notes')
 router.register(r'users', UserViewSet, base_name='users')

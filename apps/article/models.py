@@ -10,7 +10,7 @@ class Article(models.Model):
 
     headline = models.CharField(max_length=200)
     description = models.TextField()
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField(null=True, blank=True, upload_to='front/src/images/articles/')
 
     # TODO category, tags
 

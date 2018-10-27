@@ -62,7 +62,6 @@ class Note extends Component {
             required />
           <input type="submit" value="Save Note" />
         </form>
-        {/*<button onClick={this.resetForm}>Reset</button>*/}
       </div>
     )
   }

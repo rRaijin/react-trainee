@@ -20,7 +20,6 @@ export default function articles(state=initialState, action) {
 
         case ADD_ARTICLE:
             articleList.unshift(action.article);
-            console.log('list', articleList);
             return articleList;
 
         default:
