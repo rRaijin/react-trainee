@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Redirect } from 'react-router-dom';
+
 
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
@@ -52,7 +54,11 @@ class CreateArticleDialog extends React.Component {
     };
 
     handleClickOpen = () => {
-        this.setState({ open: true });
+        if (this.props.is_auth) {
+            this.setState({open: true});
+        } else {
+            return <Redirect to="/login" />;
+        }
     };
 
     handleClose = () => {

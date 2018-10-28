@@ -50,9 +50,10 @@ class RootContainer extends Component {
                     <Route exact path="/register" component={Register} />
                     <Route path="/articles/:id" component={ArticleDetail} />
                     <Route path="/users/:id/author" component={AuthorPage} />
-                    <Route component={NotFound} />
                     <PrivateRoute exact path="/notes" component={Note} />
                     <PrivateRoute exact path="/profile" component={ProfilePage} />
+
+                    <Route component={NotFound} />
                 </Switch>
             </div>
         </BrowserRouter>

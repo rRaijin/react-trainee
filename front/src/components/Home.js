@@ -14,6 +14,7 @@ class Home extends Component {
     };
 
     render() {
+        console.log(this.props);
         return (
             <div className="row">
                 <div className="col-lg-8">
@@ -22,7 +23,7 @@ class Home extends Component {
                     ))}
                 </div>
                 <div className="col-lg-4">
-                    <CreateArticleDialog add_article={this.props.addArticle} />
+                    <CreateArticleDialog add_article={this.props.addArticle} is_auth={this.props.auth.user} />
                 </div>
             </div>
         )
@@ -33,6 +34,7 @@ class Home extends Component {
 const mapStateToProps = state => {
     return {
         articles: state.articles,
+        auth: state.auth,
     }
 };
 
