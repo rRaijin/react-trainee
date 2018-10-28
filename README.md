@@ -7,7 +7,7 @@
  ```
  * Production vars
  ```bash
- export SECRET_KEY=<your_secret_key>
+ export SECRET_KEY=your_secret_key
  ``` 
 
 
