@@ -1,4 +1,6 @@
 import os
+from django.conf import settings
+
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 ALLOWED_HOSTS = [u'notfacebook.pythonanywhere.com']
@@ -13,3 +15,9 @@ DATABASES = {
         'PORT': 3306
     }
 }
+
+
+MEDIA_ROOT = os.path.join(settings.BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(settings.BASE_DIR, 'static')
+STATIC_URL = '/static/'
