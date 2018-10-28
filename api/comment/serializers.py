@@ -16,7 +16,6 @@ class CommentSerializer(serializers.ModelSerializer):
             'id',
             'article',
             'author',
-            'description',
             'created',
             'updated',
         )
