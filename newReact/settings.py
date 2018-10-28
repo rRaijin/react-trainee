@@ -20,10 +20,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'w*)z8iso1*cxn(f5=slamcj1qp^ypg_o5d=us$z8v4@8s9+^z9'
+SECRET_KEY = 'foo-secret'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', False) == 'True'
 
 ALLOWED_HOSTS = []
 
@@ -147,3 +147,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+if DEBUG:
+    try:
+        from .settings_dev import *
+    except ImportError:
+        print("You don't provide development settings")
+else:
+    try:
+        from .settings_prod import *
+    except ImportError:
+        print("You don't provide production settings")
