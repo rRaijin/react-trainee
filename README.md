@@ -19,4 +19,11 @@
 
 
 ## Frontend
-> TODO notes how to run front
+
+After downloading the project, in the console you need to go to the folder with the front-end part
+* Go to directory:
+`cd front/`
+* Install packages:
+`npm install`
+* Start development server:
+`npm run start`
