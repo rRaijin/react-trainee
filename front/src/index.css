@@ -33,3 +33,20 @@ nav a:hover {
 nav :last-child {
     color: black;
 }
+
+.pagination li {
+    margin: 0 2px;
+    padding: 5px 10px;
+    border: 0.5px solid #8c8383;
+    background-color: #c2d4f5;
+    color: #0c3d67;
+}
+
+.pagination {
+    margin-top: 5px;
+}
+
+.pagination li:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}

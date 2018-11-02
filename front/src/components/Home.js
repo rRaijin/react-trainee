@@ -4,22 +4,40 @@ import {connect} from 'react-redux';
 import {articles} from "../actions";
 import ArticlePreview from "./article/ArticlePreview";
 import CreateArticleDialog from "./CreateArticleDialog";
+import Pagination from "./Pagination";
 
 class Home extends Component {
 
+    constructor() {
+        super();
+        this.state = {
+            articles: [],
+            pageOfItems: []
+        };
+        this.onChangePage = this.onChangePage.bind(this);
+    }
+
     componentDidMount() {
         if (!this.props.articles || this.props.articles.length === 0) {
-            this.props.fetchAllArticles()
+            this.props.fetchAllArticles().then((res) => {
+                this.setState({articles: res.articles})
+            })
         }
     };
+
+    onChangePage(pageOfItems) {
+        // update state with new page of items
+        this.setState({ pageOfItems: pageOfItems });
+    }
 
     render() {
         return (
             <div className="row">
                 <div className="col-lg-8">
-                    {this.props.articles.map((article, id) => (
+                    {this.state.pageOfItems.map((article, id) => (
                         <ArticlePreview article={article} key={id} />
                     ))}
+                    <Pagination items={this.state.articles} onChangePage={this.onChangePage} />
                 </div>
                 <div className="col-lg-4">
                     <CreateArticleDialog add_article={this.props.addArticle} is_auth={this.props.auth.user} />
@@ -40,7 +58,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchAllArticles: () => {
-            dispatch(articles.fetchAllArticles());
+            return dispatch(articles.fetchAllArticles());
         },
         addArticle: (headline, description, image) => {
             return dispatch(articles.addArticle(headline, description, image));

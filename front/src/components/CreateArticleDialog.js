@@ -57,7 +57,8 @@ class CreateArticleDialog extends React.Component {
         if (this.props.is_auth) {
             this.setState({open: true});
         } else {
-            return <Redirect to="/login" />;
+            console.log('sx');
+            return (<Redirect to="/login" />);
         }
     };
 
