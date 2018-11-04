@@ -11,7 +11,6 @@ class Home extends Component {
     constructor() {
         super();
         this.state = {
-            articles: [],
             pageOfItems: []
         };
         this.onChangePage = this.onChangePage.bind(this);
@@ -19,9 +18,7 @@ class Home extends Component {
 
     componentDidMount() {
         if (!this.props.articles || this.props.articles.length === 0) {
-            this.props.fetchAllArticles().then((res) => {
-                this.setState({articles: res.articles})
-            })
+            this.props.fetchAllArticles()
         }
     };
 
@@ -37,7 +34,7 @@ class Home extends Component {
                     {this.state.pageOfItems.map((article, id) => (
                         <ArticlePreview article={article} key={id} />
                     ))}
-                    <Pagination items={this.state.articles} onChangePage={this.onChangePage} />
+                    <Pagination items={this.props.articles} onChangePage={this.onChangePage} />
                 </div>
                 <div className="col-lg-4">
                     <CreateArticleDialog add_article={this.props.addArticle} is_auth={this.props.auth.user} />
