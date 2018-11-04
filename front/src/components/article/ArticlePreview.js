@@ -4,6 +4,13 @@ import {Link} from "react-router-dom";
 
 export default class ArticlePreview extends Component {
 
+    truncate_description = () => {
+       if (this.props.article.description.length > 100)
+          return this.props.article.description.substring(0,100)+'...';
+       else
+          return this.props.article.description;
+    };
+
     render() {
         return (
             <div className="article-container">
@@ -17,7 +24,7 @@ export default class ArticlePreview extends Component {
                 }
 
                 {/*тоже пока костыль нид через ферст оф тайп взять*/}
-                <p className="article-description">{this.props.article.short_description}...</p>
+                <p className="article-description">{this.truncate_description()}</p>
                 <p>
                     <span>Published at {this.props.article.created} by </span>
                     <Link to={{ pathname: 'users/' + this.props.article.author.id + '/author' }}>
