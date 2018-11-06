@@ -28,6 +28,9 @@ class Home extends Component {
     }
 
     render() {
+        // console.log(this.props.auth.token);
+        // console.log(this.props.articles.length);
+        // console.log('state', this.state);
         return (
             <div className="row">
                 <div className="col-lg-8">

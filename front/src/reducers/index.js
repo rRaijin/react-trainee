@@ -4,6 +4,7 @@ import articles from "./articles";
 import auth from "./auth";
 import notes from "./notes";
 import users from "./users";
+import self_articles from "./self-articles";
 
 
 const romaApp = combineReducers({
@@ -11,6 +12,7 @@ const romaApp = combineReducers({
     auth,
     notes,
     users,
+    self_articles,
 });
 
 export default romaApp;

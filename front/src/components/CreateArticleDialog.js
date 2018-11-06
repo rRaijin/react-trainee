@@ -39,6 +39,7 @@ function Transition(props) {
 }
 
 class CreateArticleDialog extends React.Component {
+
     constructor() {
         super();
         this.state = {
@@ -46,6 +47,9 @@ class CreateArticleDialog extends React.Component {
             headline: "",
             description: "",
             selectedFile: null
+            // headline: this.props.article.headline,
+            // description: this.props.article.description,
+            // selectedFile: this.props.article.image
         };
         this.imageUpToParent = this.imageUpToParent.bind(this);
     }
@@ -75,6 +79,7 @@ class CreateArticleDialog extends React.Component {
         e.preventDefault();
         this.handleClose();
         this.props.add_article(
+            // this.props.article.id,
             this.state.headline,
             this.state.description,
             this.state.selectedFile

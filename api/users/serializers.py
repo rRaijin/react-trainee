@@ -9,7 +9,6 @@ class ArticlePreviewSerializer(serializers.ModelSerializer):
 
     created = serializers.DateTimeField(format="%Y-%m-%d", required=False, read_only=True)
     updated = serializers.DateTimeField(format="%Y-%m-%d", required=False, read_only=True)
-    short_description = serializers.SerializerMethodField()
     img_name = serializers.SerializerMethodField()
 
     def get_img_name(self, obj):
@@ -18,18 +17,11 @@ class ArticlePreviewSerializer(serializers.ModelSerializer):
         else:
             return False
 
-    def get_short_description(self, obj):
-        if obj.description:
-            return obj.description[:100]
-        else:
-            return False
-
     class Meta:
         model = Article
         fields = (
             'id',
             'headline',
-            'short_description',
             'img_name',
             'created',
             'updated',
@@ -38,7 +30,6 @@ class ArticlePreviewSerializer(serializers.ModelSerializer):
             'id',
             'created',
             'img_name',
-            'short_description',
         )
 
 
