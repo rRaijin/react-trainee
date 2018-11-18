@@ -14,6 +14,7 @@ class ArticleViewSet(viewsets.ModelViewSet):
         'list': ArticleSerializer,
         'create': ArticleSerializer,
         'self_articles': ArticleSerializer,
+        'partial_update': ArticleSerializer,
     }
 
     def get_serializer_class(self):
@@ -33,6 +34,13 @@ class ArticleViewSet(viewsets.ModelViewSet):
             serializer.save(author=author, image=image)
         else:
             serializer.save(author=author)
+
+    def perform_update(self, serializer):
+        if self.request.data.get('image') is not None:
+            image = self.request.data.get('image')
+            serializer.save(image=image)
+        else:
+            serializer.save()
 
     # TODO permissions author only
     @detail_route(methods=['get'], permission_classes=[permissions.IsAuthenticated])

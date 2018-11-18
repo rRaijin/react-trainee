@@ -45,7 +45,6 @@ export const updateUserAttr = (userId, attr, new_value) => {
     let body = JSON.stringify(input_data);
 
     return fetch(`/api/users/${userId}/`, {headers, method: "PATCH", body})
-      // .then(res => {return console.log(res.json())})
       .then(res => {
         if (res.status < 500) {
           return res.json().then(data => {

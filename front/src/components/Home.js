@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-import {articles} from "../actions";
+import { articles } from "../actions";
 import ArticlePreview from "./article/ArticlePreview";
 import CreateArticleDialog from "./CreateArticleDialog";
 import Pagination from "./Pagination";
@@ -11,36 +11,44 @@ class Home extends Component {
     constructor() {
         super();
         this.state = {
-            pageOfItems: []
+            pageOfItems: [],
+            articles: []
         };
         this.onChangePage = this.onChangePage.bind(this);
     }
 
-    componentDidMount() {
-        if (!this.props.articles || this.props.articles.length === 0) {
-            this.props.fetchAllArticles()
-        }
+    componentWillMount() {
+        this.props.fetchAllArticles().then((res) => this.setState({
+            articles: res.articles
+        }))
     };
 
+    componentWillReceiveProps(nextProps) {
+        if (this.state.articles.length !== nextProps.articles.length) {
+            this.setState({
+                articles: nextProps.articles
+            })
+        }
+    }
+
     onChangePage(pageOfItems) {
-        // update state with new page of items
         this.setState({ pageOfItems: pageOfItems });
     }
 
     render() {
-        // console.log(this.props.auth.token);
-        // console.log(this.props.articles.length);
-        // console.log('state', this.state);
         return (
             <div className="row">
                 <div className="col-lg-8">
                     {this.state.pageOfItems.map((article, id) => (
-                        <ArticlePreview article={article} key={id} />
+                        <ArticlePreview article={ article } key={ id } />
                     ))}
-                    <Pagination items={this.props.articles} onChangePage={this.onChangePage} />
+                    <Pagination items={ this.state.articles } onChangePage={ this.onChangePage } />
                 </div>
                 <div className="col-lg-4">
-                    <CreateArticleDialog add_article={this.props.addArticle} is_auth={this.props.auth.user} />
+                    <CreateArticleDialog add_article={ this.props.addArticle }
+                                         is_auth={ this.props.auth.user }
+                                         btn_name='Create article'
+                    />
                 </div>
             </div>
         )

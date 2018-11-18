@@ -42,7 +42,7 @@ class UploadImage extends React.Component {
                   Upload
               </Button>
               <span className={classes.span}>
-                  {this.state.filename}
+                  { this.props.initial_img_name ? this.props.initial_img_name : this.state.filename }
               </span>
           </div>
         );
