@@ -8,5 +8,5 @@ export {
     notes,
     auth,
     users,
-    articles
+    articles,
 }

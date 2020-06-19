@@ -4,7 +4,15 @@ import {Link} from "react-router-dom";
 
 export default class Article extends Component {
 
+    state = {
+    headline: "",
+        description: "",
+        image: null,
+    updateArticleId: null,
+  };
+
     render() {
+        console.log('article props', this.props);
         return (
             <div className="article-container">
                 <h3 className="article-headline">{this.props.article.headline}</h3>
@@ -17,6 +25,7 @@ export default class Article extends Component {
                 <p>
                     <span>Published at {this.props.article.created}</span>
                 </p>
+                <p onClick={this.props.deleteArticle(this.props.article.id)}>del</p>
                 <Link to={{ pathname: '/articles/' + this.props.article.id}}>more >></Link>
             </div>
         )

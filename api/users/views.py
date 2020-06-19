@@ -22,7 +22,10 @@ class UserViewSet(mixins.RetrieveModelMixin,
 
 
     def get_queryset(self):
-        return User.objects.all()
+        qs = User.objects.all()
+        if self.action == "author":
+            qs.prefetch_related('articles')
+        return qs
 
     @detail_route(methods=['get'], permission_classes=[permissions.AllowAny])
     def author(self, request, *args, **kwargs):

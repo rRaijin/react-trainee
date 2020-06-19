@@ -39,16 +39,26 @@ function Transition(props) {
 }
 
 class CreateArticleDialog extends React.Component {
+
     constructor() {
         super();
         this.state = {
             open: false,
             headline: "",
             description: "",
-            selectedFile: null
+            selectedFile: null,
+            article: null,
         };
         this.imageUpToParent = this.imageUpToParent.bind(this);
     }
+
+    componentWillMount() {
+        this.setState({
+            headline: this.props.article ? this.props.article.headline : this.state.headline,
+            description: this.props.article ? this.props.article.description : this.state.description,
+        })
+    }
+
     imageUpToParent = (param) => {
         this.setState({selectedFile: param});
     };
@@ -77,20 +87,30 @@ class CreateArticleDialog extends React.Component {
         this.props.add_article(
             this.state.headline,
             this.state.description,
-            this.state.selectedFile
+            this.state.selectedFile,
+            this.props.article && this.props.article.id
         );
     };
+
+    _handleKeyPress(e) {
+        if (e.key === 'Enter') {
+            if (!this.state.disabled) {
+                this.onSubmit(e);
+            }
+        }
+    }
 
     render() {
         const { classes } = this.props;
         return (
             <div>
-                <Button onClick={this.handleClickOpen}>Create article</Button>
+                <Button onClick={this.handleClickOpen}>{ this.props.btn_name }</Button>
                 <Dialog
                     fullScreen
                     open={this.state.open}
                     onClose={this.handleClose}
                     TransitionComponent={Transition}
+                    onKeyPress={(e) => this._handleKeyPress(e)}
                 >
                     <AppBar className={classes.appBar}>
                         <Toolbar>
@@ -133,7 +153,13 @@ class CreateArticleDialog extends React.Component {
                             value={this.state.description}
                             onChange={(e) => this.setState({description: e.target.value})}
                         />
-                        <UploadImage imageUpToParent={this.imageUpToParent} />
+                        <UploadImage initial_img_name={
+                                         this.props.article &&
+                                         this.props.article.img_name &&
+                                         this.props.article.img_name
+                                     }
+                                     imageUpToParent={this.imageUpToParent}
+                        />
                     </form>
                 </Dialog>
             </div>
