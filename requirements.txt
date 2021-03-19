@@ -12,7 +12,7 @@ django-cors-headers==2.4.0
 django-rest-knox==3.1.5
 django-rest-swagger==2.2.0
 django-webpack-loader==0.6.0
-djangorestframework==3.8.2
+djangorestframework==3.11.2
 idna==2.7
 ipdb==0.11
 ipython==7.0.1
